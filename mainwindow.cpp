@@ -1,4 +1,4 @@
-#include "lending_system.h"
+#include "mainwindow.h"
 
 lending_system::lending_system(QMainWindow *parent) : QMainWindow(parent){
     setupUi(this);

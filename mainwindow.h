@@ -1,5 +1,5 @@
-#ifndef LENDING_SYSTEM_H
-#define LENDING_SYSTEM_H
+#ifndef MAINWINDOW_H 
+#define MAINWINDOW_H 
 #include "ui_lending_system.h"
 
 class lending_system : public QMainWindow, public Ui::MainWindow{
