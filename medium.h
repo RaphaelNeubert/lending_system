@@ -11,7 +11,7 @@ class medium{
 
     public:
         medium(QString name, QString type);
-        QString getName();
-        QString getType();
+        QString get_name();
+        QString get_type();
 };
 #endif

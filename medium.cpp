@@ -6,10 +6,10 @@ medium::medium(QString name, QString type){
     this->type=type;
 }
 
-QString medium::getName(){
+QString medium::get_name(){
     return name;
 }
 
-QString medium::getType(){
+QString medium::get_type(){
     return type;
 }
