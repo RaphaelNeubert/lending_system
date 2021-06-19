@@ -4,8 +4,10 @@
 class medium{
     private:
         QString name;
-        bool lend;
         QString type;
+        unsigned int id;
+        bool lend;
+
 
     public:
         medium(QString name, QString type);
