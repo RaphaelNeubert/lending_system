@@ -2,6 +2,7 @@
 #define LENDING_SYSTEM_H
 #include "medium.h"
 #include <QList>
+
 class lending_system{
     private:
         QList<medium*> medlist;

@@ -11,7 +11,8 @@ class book : public medium{
     public:
         book(QString name);
         book(QString name, QString author);
-        book(QString name, QString author, unsigned int id, bool lend);
+        book(QString name, QString author, unsigned int id, bool lend, unsigned int person_id, QDate lend_date);
+        QString get_author();
 };
 
 

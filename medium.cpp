@@ -6,7 +6,8 @@ medium::medium(QString name, QString type){
     this->type=type;
 }
 
-medium::medium(QString name, QString type, unsigned int id, bool lend) : name(name),type(type),id(id),lend(lend){}
+medium::medium(QString name, QString type, unsigned int id, bool lend, unsigned int person_id, QDate lend_date) :
+    name(name),type(type),id(id),lend(lend),person_id(person_id),lend_date(lend_date){}
 
 QString medium::get_name(){
     return name;
@@ -14,6 +15,10 @@ QString medium::get_name(){
 
 QString medium::get_type(){
     return type;
+}
+
+bool medium::get_lend(){
+    return lend;
 }
 
 void medium::set_lend(bool lend){
