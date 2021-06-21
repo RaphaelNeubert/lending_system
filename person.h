@@ -4,14 +4,15 @@
 
 class person{
     private:
-        unsigned int id;
         QString fname;
         QString lname;
+        unsigned int id;
         unsigned int numlend;
 
     public:
         person(QString lname);
         person(QString fname, QString lname);
+        person(QString fname, QString lname, unsigned int id, unsigned int numlend);
         QString get_fname();
         QString get_lname();
         unsigned int get_id();

@@ -7,6 +7,7 @@ int main( int argc, char* argv[]){
 	mainwindow w;
     lending_system tmp;
     tmp.read_medium();
+    tmp.read_person();
 	w.show();
 	return a.exec();
 }

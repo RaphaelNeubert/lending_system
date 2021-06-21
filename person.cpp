@@ -10,6 +10,9 @@ person::person(QString fname, QString lname){
     this->fname=fname;
     numlend=0;
 }
+person::person(QString fname, QString lname, unsigned int id, unsigned int numlend) : fname(fname), lname(lname),
+                                                                                      id(id), numlend(numlend) {
+}
 
 QString person::get_fname(){
     return fname;
