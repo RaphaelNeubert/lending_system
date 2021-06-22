@@ -13,6 +13,7 @@ class lending_system{
         lending_system();
         void read_medium();     //loads mediums from file into QList
         void read_person();     //loads persons from file into QList
+        void write_person();    //saves persons from QList into file
 };
 
 
