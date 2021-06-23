@@ -21,6 +21,18 @@ bool medium::get_lend(){
     return lend;
 }
 
+unsigned int medium::get_id(){
+    return id; 
+}
+
+unsigned int medium::get_person_id(){
+    return person_id;
+}
+
+QDate medium::get_lend_date(){
+    return lend_date;
+}
+
 void medium::set_lend(bool lend){
     this->lend=lend;
 }

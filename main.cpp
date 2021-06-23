@@ -9,6 +9,7 @@ int main( int argc, char* argv[]){
     tmp.read_medium();
     tmp.read_person();
     tmp.write_person();
+    tmp.write_medium();
 	w.show();
 	return a.exec();
 }

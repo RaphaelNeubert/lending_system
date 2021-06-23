@@ -48,8 +48,6 @@ void lending_system::read_person(){
         QStringList fields = line.split(";");
         person* p = new person(fields[0], fields[1], fields[2].toUInt(), fields[3].toUInt());
         perlist.append(p);
-        std::cout<<perlist[0]->get_fname().toStdString()<<std::endl;
-        std::cout<<perlist[0]->get_fname().toStdString()<<std::endl;
     }
     f.close();
 }
@@ -62,11 +60,27 @@ void lending_system::write_person(){
 //TODO error message
         return;
     }
-    std::cout<<"test"<<std::endl;
-    //f.seek(0);
     for (int i=0; i<perlist.size(); i++){
-        line=perlist[i]->get_fname()+";"+perlist[i]->get_lname()+';'+QString::number(perlist[i]->get_id())
+        line = perlist[i]->get_fname()+";"+perlist[i]->get_lname()+';'+QString::number(perlist[i]->get_id())
                                     +';'+QString::number(perlist[i]->get_numlend())+'\n';
+        f.write(line.toUtf8());
+    }
+    f.close();
+
+}
+
+void lending_system::write_medium(){
+    QFile f("medien.csv");
+    QString line;
+
+    if (!f.open(QIODevice::WriteOnly | QIODevice::Truncate | QIODevice::Text)){
+//TODO error message
+        return;
+    }
+    for (int i=0; i<medlist.size(); i++){
+        line = medlist[i]->get_name()+';'+medlist[i]->get_type()+';'+QString::number(medlist[i]->get_id())+';'
+            +QString::number(medlist[i]->get_lend())+';'+QString::number(medlist[i]->get_person_id())+';'
+            +medlist[i]->get_lend_date().toString()+'\n';
         f.write(line.toUtf8());
     }
     f.close();
