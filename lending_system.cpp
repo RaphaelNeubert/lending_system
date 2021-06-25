@@ -100,4 +100,7 @@ void lending_system::write_medium(){
     f.close();
 }
 
+void lending_system::delete_person(unsigned int id){
+    qDebug()<<id;
+}
 

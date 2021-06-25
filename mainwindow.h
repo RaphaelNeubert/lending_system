@@ -12,10 +12,6 @@ class mainwindow: public QMainWindow, public Ui::MainWindow, public lending_syst
 	public:
 		mainwindow(QMainWindow *parent=0);
 		~mainwindow();
-
-    private slots:
-    
-
 };
 
 #endif
