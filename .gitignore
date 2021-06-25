@@ -1,3 +1,6 @@
+#executable
+lending_system
+
 # C++ objects and libs
 *.slo
 *.lo
