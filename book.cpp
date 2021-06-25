@@ -10,7 +10,7 @@ book::book(QString name, QString author) : medium(name, QString("book")){
     this->publisher=publisher;
 }
 
-book::book(QString name, QString author, unsigned int id, bool lend, unsigned int person_id, QDate lend_date) :
+book::book(QString name, QString author, QString publisher, unsigned int id, bool lend, unsigned int person_id, QDate lend_date) :
     medium(name, QString("book"),id,lend,person_id,lend_date){
     this->author=author;
     this->publisher=publisher;

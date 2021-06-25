@@ -12,7 +12,7 @@ lending_system::lending_system(){
 }
 
 void lending_system::read_medium(){
-    QFile f("medien.csv");
+    QFile f("medium.csv");
     if(!f.open(QIODevice::ReadOnly)){
 //TODO error message
         return;
@@ -22,8 +22,8 @@ void lending_system::read_medium(){
         QString line = in.readLine();
         QStringList fields = line.split(";");
         if(fields[1]=="book"){
-            book* b = new book(fields[0],fields[2],fields[3].toUInt(),fields[4].toInt(),fields[5].toUInt(),
-                    QDate::fromString(fields[6]));
+            book* b = new book(fields[0],fields[2],fields[3],fields[4].toUInt(),fields[5].toInt(),fields[6].toUInt(),
+                    QDate::fromString(fields[7]));
             medlist.append((medium*)b);
 
             /* 
@@ -70,7 +70,7 @@ void lending_system::write_person(){
 }
 
 void lending_system::write_medium(){
-    QFile f("medien.csv");
+    QFile f("medium.csv");
     QString line;
 
     if (!f.open(QIODevice::WriteOnly | QIODevice::Truncate | QIODevice::Text)){
