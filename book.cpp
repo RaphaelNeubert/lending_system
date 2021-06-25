@@ -1,17 +1,22 @@
 #include <QString>
 #include "book.h"
 
-book::book(QString name) : medium(name, QString("book")){
+book::book(QString title) : medium(title, QString("book")){
     //this->author="";
 }
 
-book::book(QString name, QString author) : medium(name, QString("book")){
+book::book(QString title, QString author) : medium(title, QString("book")){
     this->author=author;
-    this->publisher=publisher;
 }
 
-book::book(QString name, QString author, QString publisher, unsigned int id, bool lend, unsigned int person_id, QDate lend_date) :
-    medium(name, QString("book"),id,lend,person_id,lend_date){
+book::book(QString title, QString author, QString publisher) : medium(title, QString("book")){
+    this->author=author;
+    this->publisher=publisher;
+
+}
+
+book::book(QString title, QString author, QString publisher, unsigned int id, bool lend, unsigned int person_id, QDate lend_date) :
+    medium(title, QString("book"),id,lend,person_id,lend_date){
     this->author=author;
     this->publisher=publisher;
 }

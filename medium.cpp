@@ -1,16 +1,16 @@
 #include "medium.h"
 #include <QString>
 
-medium::medium(QString name, QString type){
-    this->name=name;
+medium::medium(QString title, QString type){
+    this->title=title;
     this->type=type;
 }
 
-medium::medium(QString name, QString type, unsigned int id, bool lend, unsigned int person_id, QDate lend_date) :
-    name(name),type(type),id(id),lend(lend),person_id(person_id),lend_date(lend_date){}
+medium::medium(QString title, QString type, unsigned int id, bool lend, unsigned int person_id, QDate lend_date) :
+    title(title),type(type),id(id),lend(lend),person_id(person_id),lend_date(lend_date){}
 
-QString medium::get_name(){
-    return name;
+QString medium::get_title(){
+    return title;
 }
 
 QString medium::get_type(){

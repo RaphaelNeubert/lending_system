@@ -2,31 +2,38 @@
 #include <QTextStream>
 #include <QStringList>
 #include <QString>
+#include <QDebug>
 #include <QDate>
 #include <iostream>
 #include "lending_system.h"
 #include "book.h"
 #include "person.h"
+#include "cd.h"
 
 lending_system::lending_system(){
 }
 
 void lending_system::read_medium(){
     QFile f("medium.csv");
-    if(!f.open(QIODevice::ReadOnly)){
+    if (!f.open(QIODevice::ReadOnly)){
         //TODO error message
         return;
     }
     QTextStream in(&f);
-    while (!in.atEnd()) {
+    while (!in.atEnd()){
         QString line = in.readLine();
         QStringList fields = line.split(";");
-        if(fields[0]=="book"){
-            //creates new book instance 
-            book* b = new book(fields[1],fields[2],fields[3],fields[4].toUInt(),fields[5].toInt(),fields[6].toUInt(),
-                    QDate::fromString(fields[7]));
+        if (fields[0]=="book"){
+            //creates new book instance on heap
+            book* b = new book(fields[1],fields[2],fields[3],fields[4].toUInt(),fields[5].toInt(),
+                               fields[6].toUInt(),QDate::fromString(fields[7], QString("dd.MM.yyyy")));
             //adds book to list
             medlist.append((medium*)b);
+        }
+        else if (fields[0]=="cd"){
+            cd* c = new cd(fields[1],fields[2],fields[3],fields[4].toUInt(),fields[5].toInt(),fields[6].toUInt(),
+                           QDate::fromString(fields[7]));
+            medlist.append((medium*)c);
 
         }
     }
@@ -75,10 +82,19 @@ void lending_system::write_medium(){
     }
     for (int i=0; i<medlist.size(); i++){
         //creates one line for the csv file
-        line = medlist[i]->get_type()+';'+medlist[i]->get_name()+';'+((book*)medlist[i])->get_author()+';'
-            +((book*)medlist[i])->get_publisher()+';'+QString::number(medlist[i]->get_id())+';'
-            +QString::number(medlist[i]->get_lend())+';'+QString::number(medlist[i]->get_person_id())+';'
-            +medlist[i]->get_lend_date().toString()+'\n';
+        if (medlist[i]->get_type()=="book"){
+            line = medlist[i]->get_type()+';'+medlist[i]->get_title()+';'+((book*)medlist[i])->get_author()+';'
+                +((book*)medlist[i])->get_publisher()+';'+QString::number(medlist[i]->get_id())+';'
+                +QString::number(medlist[i]->get_lend())+';'+QString::number(medlist[i]->get_person_id())+';'
+                +medlist[i]->get_lend_date().toString(QString("dd.MM.yyyy"))+'\n';
+        }
+
+        else if (medlist[i]->get_type()=="cd"){
+            line = medlist[i]->get_type()+';'+medlist[i]->get_title()+';'+((cd*)medlist[i])->get_artist()+';'
+                +((cd*)medlist[i])->get_producer()+';'+QString::number(medlist[i]->get_id())+';'
+                +QString::number(medlist[i]->get_lend())+';'+QString::number(medlist[i]->get_person_id())+';'
+                +medlist[i]->get_lend_date().toString(QString("dd.MM.yyyy"))+'\n';
+        }
         f.write(line.toUtf8()); //ASCCI
     }
     f.close();
