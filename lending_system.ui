@@ -40,6 +40,41 @@
      <attribute name="title">
       <string>Personen</string>
      </attribute>
+     <widget class="QTableWidget" name="person_table">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>60</y>
+        <width>791</width>
+        <height>471</height>
+       </rect>
+      </property>
+      <column>
+       <property name="text">
+        <string>ID</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Vorname</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Nachname</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>geliehene Medien</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string/>
+       </property>
+      </column>
+     </widget>
     </widget>
    </widget>
   </widget>

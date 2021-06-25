@@ -6,7 +6,7 @@
 #include "person.h"
 
 class lending_system{
-    private:
+    protected:
         QList<medium*> medlist; //saves all medium objects
         QList<person*> perlist; //saves all person objects
     public:

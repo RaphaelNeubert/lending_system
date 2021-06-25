@@ -3,10 +3,12 @@
 #include "ui_lending_system.h"
 #include "lending_system.h"
 
-class mainwindow: public QMainWindow, public Ui::MainWindow{
+class mainwindow: public QMainWindow, public Ui::MainWindow, public lending_system{
     Q_OBJECT
     private:
         lending_system lend;
+
+        void create_person_table();
 	public:
 		mainwindow(QMainWindow *parent=0);
 		~mainwindow();
