@@ -13,10 +13,9 @@ mainwindow::mainwindow(QMainWindow *parent) : QMainWindow(parent){
     lend.read_medium();
 
     create_person_table();
-    radio_cd->setChecked(true);
-    create_medium_table();
 
     connect(radio_book, &QRadioButton::toggled, this, &mainwindow::create_medium_table);
+    radio_book->setChecked(true);
 }
 
 mainwindow::~mainwindow(){
