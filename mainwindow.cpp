@@ -35,8 +35,9 @@ void mainwindow::create_person_table(){
         tmp->setTextAlignment(Qt::AlignCenter);
         person_table->setItem(i,3, tmp);
 
-        QPushButton* btn= new QPushButton("delete"); //TODO Add icon as ctor argument
-        //connect(btn, SIGNAL(clicked()), this, SLOT(delete_person(perlist[i]->get_id())));
+        QPushButton* btn= new QPushButton("delete"); //OPTIONAL TODO Add icon as ctor argument
+        //connect buttons using lambda
+        connect(btn, &QPushButton::clicked, this, [this,i,plist]() { lend.delete_person(plist[i]->get_id()); });
         person_table->setCellWidget(i,4,btn);
     }
 }
