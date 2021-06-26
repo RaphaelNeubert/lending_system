@@ -12,6 +12,8 @@ class mainwindow: public QMainWindow, public Ui::MainWindow{
 	public:
 		mainwindow(QMainWindow *parent=0);
 		~mainwindow();
+    public slots:
+        void create_medium_table();
 };
 
 #endif

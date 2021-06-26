@@ -100,10 +100,19 @@ void lending_system::write_medium(){
     f.close();
 }
 
+
+QList<person*> const& lending_system::get_perlist() const{
+    return perlist;
+}
+
+QList<medium*> const& lending_system::get_medlist() const{
+    return medlist;
+}
+
 void lending_system::delete_person(unsigned int id){
     qDebug()<<id;
 }
 
-QList<person*> const& lending_system::get_perlist() const{
-    return perlist;
+void lending_system::delete_medium(unsigned int id){
+    qDebug()<<id;
 }

@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="tab_lend">
      <attribute name="title">
@@ -35,6 +35,55 @@
      <attribute name="title">
       <string>Medien</string>
      </attribute>
+     <widget class="QTableWidget" name="medium_table">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>70</y>
+        <width>791</width>
+        <height>461</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QGroupBox" name="medium_select">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>120</width>
+        <height>61</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>Medium Art</string>
+      </property>
+      <widget class="QRadioButton" name="radio_book">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>20</y>
+         <width>91</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Buch</string>
+       </property>
+      </widget>
+      <widget class="QRadioButton" name="radio_cd">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>40</y>
+         <width>91</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>CD</string>
+       </property>
+      </widget>
+     </widget>
     </widget>
     <widget class="QWidget" name="tab_person">
      <attribute name="title">
