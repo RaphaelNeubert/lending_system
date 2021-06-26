@@ -104,3 +104,6 @@ void lending_system::delete_person(unsigned int id){
     qDebug()<<id;
 }
 
+QList<person*> const& lending_system::get_perlist() const{
+    return perlist;
+}

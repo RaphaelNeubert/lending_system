@@ -3,7 +3,7 @@
 #include "ui_lending_system.h"
 #include "lending_system.h"
 
-class mainwindow: public QMainWindow, public Ui::MainWindow, public lending_system{
+class mainwindow: public QMainWindow, public Ui::MainWindow{
     Q_OBJECT
     private:
         lending_system lend;
