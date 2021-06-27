@@ -24,12 +24,74 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="tab_lend">
      <attribute name="title">
-      <string>Verliehen</string>
+      <string>Verleih</string>
      </attribute>
+     <widget class="QTableWidget" name="lend_table">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>60</y>
+        <width>791</width>
+        <height>431</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QGroupBox" name="lend_state">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>120</width>
+        <height>61</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string/>
+      </property>
+      <widget class="QRadioButton" name="radio_lend_true">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>10</y>
+         <width>91</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Ausgeliehen</string>
+       </property>
+      </widget>
+      <widget class="QRadioButton" name="radio_lend_false">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>30</y>
+         <width>91</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Verfügbar</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QPushButton" name="lend_button">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>490</y>
+        <width>91</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
     </widget>
     <widget class="QWidget" name="tab_medium">
      <attribute name="title">
@@ -39,7 +101,7 @@
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>70</y>
+        <y>60</y>
         <width>791</width>
         <height>461</height>
        </rect>

@@ -4,6 +4,7 @@
 #include "cd.h"
 #include <QDebug>
 #include <QPushButton>
+#include <QCheckBox>
 
 
 mainwindow::mainwindow(QMainWindow *parent) : QMainWindow(parent){
@@ -13,9 +14,11 @@ mainwindow::mainwindow(QMainWindow *parent) : QMainWindow(parent){
     lend.read_medium();
 
     create_person_table();
-
+    //refresh table connects
     connect(radio_book, &QRadioButton::toggled, this, &mainwindow::create_medium_table);
+    connect(radio_lend_true, &QRadioButton::toggled, this, &mainwindow::create_lend_table);
     radio_book->setChecked(true);
+    radio_lend_true->setChecked(true);
 }
 
 mainwindow::~mainwindow(){
@@ -105,4 +108,107 @@ void mainwindow::create_medium_table(){
         }
     }
 }
+
+void mainwindow::create_lend_table(){
+    const QList<medium*> vlist = lend.get_medlist();
+    int n=vlist.size();
+    int count=0;
+    QStringList colNames;
+    struct checkbox_t checkbox_struct;
+
+    //deletes table contents
+    lend_table->setRowCount(0);
+    //deletes checkbox_list contents
+    checkbox_list.clear();
+
+    if (radio_lend_true->isChecked()){
+        colNames<<""<<"ID"<<"Art"<<"Titel"<<"verliehen an Person"<<"verleih Datum";
+        lend_table->setColumnCount(6); 
+        lend_button->setText("Zurück geben");
+    }
+    else{
+        colNames<<""<<"ID"<<"Art"<<"Titel";
+        lend_table->setColumnCount(4); 
+        lend_button->setText("Verleihen");
+    }
+    lend_table->setHorizontalHeaderLabels(colNames);
+    lend_table->verticalHeader()->setVisible(false); //removes row index
+    lend_table->setEditTriggers(QAbstractItemView::NoEditTriggers); //disable editing
+
+    for (int i=0; i<n; i++){
+        if (radio_lend_true->isChecked() && vlist[i]->get_lend()){
+            lend_table->insertRow(lend_table->rowCount()); //Append row
+
+            //checkbox
+            QTableWidgetItem* tmp = new QTableWidgetItem();
+            lend_table->setItem(count,0,tmp);
+            tmp->setCheckState(Qt::Unchecked);
+            //used to access checkbox states later on
+            checkbox_struct.id = vlist[i]->get_id();
+            checkbox_struct.checkbox = tmp;
+            checkbox_list.append(checkbox_struct);
+
+            //qDebug()<<checkbox_list[count].id;
+            //qDebug()<<checkbox_list[count].checkbox->checkState();
+
+            //id
+            tmp = new QTableWidgetItem(QString::number(vlist[i]->get_id()));
+            tmp->setTextAlignment(Qt::AlignCenter);
+            lend_table->setItem(count,1, tmp);
+            //type
+            lend_table->setItem(count,2, new QTableWidgetItem(vlist[i]->get_type()=="book"?"Buch":"CD"));
+            //title
+            lend_table->setItem(count,3, new QTableWidgetItem(vlist[i]->get_title()));
+            //person id
+            tmp = new QTableWidgetItem(QString::number(vlist[i]->get_person_id()));
+            tmp->setTextAlignment(Qt::AlignCenter);
+            lend_table->setItem(count,4, tmp);
+            //date
+            lend_table->setItem(count,5, new QTableWidgetItem(vlist[i]->get_lend_date().toString(QString("dd.MM.yyyy"))));
+            count++;
+        }
+        else if (!radio_lend_true->isChecked() && !vlist[i]->get_lend()){
+            lend_table->insertRow(lend_table->rowCount()); //Append row
+            //checkbox
+            QTableWidgetItem* tmp = new QTableWidgetItem();
+            lend_table->setItem(count,0,tmp);
+            tmp->setCheckState(Qt::Unchecked);
+            //used to access checkbox states later on
+            checkbox_struct.id = vlist[i]->get_id();
+            checkbox_struct.checkbox = tmp;
+            checkbox_list.append(checkbox_struct);
+            //id
+            tmp = new QTableWidgetItem(QString::number(vlist[i]->get_id()));
+            tmp->setTextAlignment(Qt::AlignCenter);
+            lend_table->setItem(count,1, tmp);
+            //type
+            lend_table->setItem(count,2, new QTableWidgetItem(vlist[i]->get_type()=="book"?"Buch":"CD"));
+            //title
+            lend_table->setItem(count,3, new QTableWidgetItem(vlist[i]->get_title()));
+            count++;
+        }
+    }
+    connect(lend_button, &QPushButton::clicked, this, &mainwindow::change_lend_status);
+}
+
+
+
+void mainwindow::change_lend_status(){
+    QList<unsigned int> ids;
+    for (int i=0; i<checkbox_list.size(); i++){
+       if (checkbox_list[i].checkbox->checkState() == Qt::Checked){
+           ids.append(checkbox_list[i].id);
+       }
+    }
+    if (radio_lend_true->isChecked()){
+        lend.set_lend_true(ids);
+        create_lend_table();
+    }
+    else{
+        lend.set_lend_false(ids);
+        create_lend_table();
+    }
+}
+
+
 

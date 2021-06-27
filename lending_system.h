@@ -2,8 +2,10 @@
 #define LENDING_SYSTEM_H
 
 #include <QList>
+#include <QTableWidgetItem>
 #include "medium.h"
 #include "person.h"
+
 
 class lending_system{
     private:
@@ -22,6 +24,8 @@ class lending_system{
 
         void delete_person(unsigned int id);       //deletes person from list
         void delete_medium(unsigned int id);       //deletes medium from list
+        void set_lend_true(const QList<unsigned int> &ids);
+        void set_lend_false(const QList<unsigned int> &ids);
 };
 
 

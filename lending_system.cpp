@@ -116,3 +116,10 @@ void lending_system::delete_person(unsigned int id){
 void lending_system::delete_medium(unsigned int id){
     qDebug()<<id;
 }
+
+void lending_system::set_lend_true(const QList<unsigned int> &ids){
+    qDebug()<<ids;
+}
+void lending_system::set_lend_false(const QList<unsigned int> &ids){
+    qDebug()<<ids;
+}
