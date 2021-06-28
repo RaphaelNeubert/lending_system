@@ -5,6 +5,8 @@
 #include <QDebug>
 #include <QPushButton>
 #include <QCheckBox>
+#include <QInputDialog>
+#include <QMessageBox>
 
 
 mainwindow::mainwindow(QMainWindow *parent) : QMainWindow(parent){
@@ -19,6 +21,7 @@ mainwindow::mainwindow(QMainWindow *parent) : QMainWindow(parent){
     connect(radio_lend_true, &QRadioButton::toggled, this, &mainwindow::create_lend_table);
     radio_book->setChecked(true);
     radio_lend_true->setChecked(true);
+    connect(lend_button, &QPushButton::clicked, this, &mainwindow::change_lend_status);
 }
 
 mainwindow::~mainwindow(){
@@ -47,7 +50,7 @@ void mainwindow::create_person_table(){
         tmp->setTextAlignment(Qt::AlignCenter);
         person_table->setItem(i,3, tmp);
         //button to delete the person
-        QPushButton* btn= new QPushButton("delete"); //OPTIONAL TODO Add icon as ctor argument
+        QPushButton* btn= new QPushButton("Löschen"); //OPTIONAL TODO Add icon as ctor argument
         //connect buttons using lambda
         connect(btn, &QPushButton::clicked, this, [this,i,plist]() { lend.delete_person(plist[i]->get_id()); });
         person_table->setCellWidget(i,4,btn);
@@ -188,7 +191,6 @@ void mainwindow::create_lend_table(){
             count++;
         }
     }
-    connect(lend_button, &QPushButton::clicked, this, &mainwindow::change_lend_status);
 }
 
 
@@ -201,12 +203,23 @@ void mainwindow::change_lend_status(){
        }
     }
     if (radio_lend_true->isChecked()){
-        lend.set_lend_true(ids);
-        create_lend_table();
-    }
-    else{
         lend.set_lend_false(ids);
+        //refresh tables
         create_lend_table();
+        create_person_table();
+    }
+    else {
+        int person_id = QInputDialog::getInt(this,"Person ID", "An welche Person sollen die Medien verliehen werden? (ID)",0,1);
+        if (!lend.check_person(person_id)){
+            QString msg="Die Person mit der ID "+QString::number(person_id)+" konnte nicht gefunden werden.";
+            QMessageBox::warning(this,"Person nicht gefunden!", msg); 
+            //Optional TODO add person button
+            return;
+        }
+        lend.set_lend_true(ids, person_id);
+        //refresh tables
+        create_lend_table();
+        create_person_table();
     }
 }
 

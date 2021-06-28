@@ -36,3 +36,11 @@ QDate medium::get_lend_date(){
 void medium::set_lend(bool lend){
     this->lend=lend;
 }
+
+void medium::set_person_id(unsigned int person_id){
+    this->person_id=person_id;
+}
+
+void medium::set_lend_date(QDate lend_date){
+    this->lend_date=lend_date;
+}

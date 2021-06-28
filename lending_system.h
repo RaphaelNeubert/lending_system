@@ -19,13 +19,19 @@ class lending_system{
         void write_medium();    //saves mediums from QList into file
         void write_person();    //saves persons from QList into file
 
+        //gives save access to lists
         QList<person*> const& get_perlist() const;
         QList<medium*> const& get_medlist() const;
 
         void delete_person(unsigned int id);       //deletes person from list
         void delete_medium(unsigned int id);       //deletes medium from list
-        void set_lend_true(const QList<unsigned int> &ids);
+
+        //change lend status
+        void set_lend_true(const QList<unsigned int> &ids, unsigned int person_id);
         void set_lend_false(const QList<unsigned int> &ids);
+
+        //checks if person exists
+        bool check_person(unsigned int id);
 };
 
 

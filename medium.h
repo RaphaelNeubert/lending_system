@@ -22,5 +22,7 @@ class medium{
         unsigned int get_person_id();
         QDate get_lend_date();
         void set_lend(bool lend);
+        void set_person_id(unsigned int person_id);
+        void set_lend_date(QDate lend_date);
 };
 #endif
