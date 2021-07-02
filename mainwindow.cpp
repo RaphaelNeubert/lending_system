@@ -232,10 +232,16 @@ void mainwindow::add_person(){
     if (pd.exec() == QDialog::Accepted){
         fname = pd.get_fname();
         lname = pd.get_lname();
-        if (lname.length() == 0){
-            QMessageBox::warning(this,"Fehler", "Das Feld \"Nachname\" darf nicht leer sein.");
-            add_person();
+    while(lname.length() == 0){
+        QMessageBox::warning(this,"Fehler", "Das Feld \"Nachname\" darf nicht leer sein.");
+        if (pd.exec() == QDialog::Accepted){
+            fname = pd.get_fname();
+            lname = pd.get_lname();
         }
+        else{
+            return;
+        }
+    }
         lend.add_person(fname,lname);
 
         create_person_table();
