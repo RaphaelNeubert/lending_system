@@ -23,7 +23,8 @@ class lending_system{
         QList<person*> const& get_perlist() const;
         QList<medium*> const& get_medlist() const;
 
-        void delete_person(unsigned int id);       //deletes person from list
+        void add_person(QString fname, QString lname); //adds person to list
+        bool delete_person(unsigned int id);       //deletes person from list
         void delete_medium(unsigned int id);       //deletes medium from list
 
         //change lend status

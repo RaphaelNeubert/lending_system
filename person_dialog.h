@@ -11,6 +11,9 @@ class person_dialog : public QDialog, public Ui::Dialog{
     public:
         person_dialog(QWidget* parent=nullptr);
         ~person_dialog();
+
+        QString get_fname();
+        QString get_lname();
 };
 
 

@@ -55,7 +55,7 @@ void mainwindow::create_person_table(){
         //button to delete the person
         QPushButton* btn= new QPushButton("Löschen"); //OPTIONAL TODO Add icon as ctor argument
         //connect buttons using lambda
-        connect(btn, &QPushButton::clicked, this, [this,i,plist]() { lend.delete_person(plist[i]->get_id()); });
+        connect(btn, &QPushButton::clicked, this, [this,i,plist]() { delete_person(plist[i]->get_id()); });
         person_table->setCellWidget(i,4,btn);
     }
 }
@@ -68,7 +68,7 @@ void mainwindow::create_medium_table(){
     //deletes table contents
     medium_table->setRowCount(0);
     if (radio_book->isChecked()) colNames<<"ID"<<"Titel"<<"Autor"<<"Verlag"<<"";
-    else colNames<<"ID"<<"Titel"<<"Artist"<<"Producer"<<"";
+    else colNames<<"ID"<<"Titel"<<"Künstler"<<"Produzent"<<"";
     medium_table->setColumnCount(5);
     medium_table->setHorizontalHeaderLabels(colNames);
     medium_table->verticalHeader()->setVisible(false); //removes row index
@@ -226,8 +226,29 @@ void mainwindow::change_lend_status(){
 
 void mainwindow::add_person(){
     person_dialog pd;
-    pd.exec();
+    QString fname;
+    QString lname;
+
+    //executes person dialog window
+    if (pd.exec() == QDialog::Accepted){
+        fname = pd.get_fname();
+        lname = pd.get_lname();
+        if (lname.length() == 0){
+            QMessageBox::warning(this,"Fehler", "Das Feld \"Nachname\" darf nicht leer sein.");
+            add_person();
+        }
+        lend.add_person(fname,lname);
+
+        create_person_table();
+    }
 }
 
-
+void mainwindow::delete_person(unsigned int id){
+    if (!lend.delete_person(id)){
+        QMessageBox::warning(this,"Fehler", "Personen können nicht gelöcht werden solange sie noch Medien\
+                                                Ausgeliehen haben.");
+        return;
+    }
+    create_person_table();
+}
 

@@ -8,3 +8,11 @@ person_dialog::person_dialog(QWidget *parent) : QDialog(parent){
 
 person_dialog::~person_dialog(){
 }
+
+QString person_dialog::get_fname(){
+    return input_fname->text();
+}
+
+QString person_dialog::get_lname(){
+    return input_lname->text();
+}

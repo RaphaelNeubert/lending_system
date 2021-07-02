@@ -80,6 +80,7 @@ DIST          = /usr/lib64/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib64/qt5/mkspecs/common/g++-base.conf \
 		/usr/lib64/qt5/mkspecs/common/g++-unix.conf \
 		/usr/lib64/qt5/mkspecs/qconfig.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_KSyntaxHighlighting.pri \
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_accessibility_support_private.pri \
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_bluetooth.pri \
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_bluetooth_private.pri \
@@ -102,6 +103,8 @@ DIST          = /usr/lib64/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_glx_support_private.pri \
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_gui.pri \
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_gui_private.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_help.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_help_private.pri \
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_input_support_private.pri \
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_multimedia.pri \
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_multimedia_private.pri \
@@ -146,6 +149,8 @@ DIST          = /usr/lib64/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_uiplugin.pri \
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_uitools.pri \
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_uitools_private.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_webchannel.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_webchannel_private.pri \
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_webkit.pri \
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_webkit_private.pri \
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_webkitwidgets.pri \
@@ -158,6 +163,8 @@ DIST          = /usr/lib64/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_xkbcommon_support_private.pri \
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_xml.pri \
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_xml_private.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_xmlpatterns.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_xmlpatterns_private.pri \
 		/usr/lib64/qt5/mkspecs/features/qt_functions.prf \
 		/usr/lib64/qt5/mkspecs/features/qt_config.prf \
 		/usr/lib64/qt5/mkspecs/linux-g++/qmake.conf \
@@ -218,6 +225,7 @@ Makefile: lending_system.pro /usr/lib64/qt5/mkspecs/linux-g++/qmake.conf /usr/li
 		/usr/lib64/qt5/mkspecs/common/g++-base.conf \
 		/usr/lib64/qt5/mkspecs/common/g++-unix.conf \
 		/usr/lib64/qt5/mkspecs/qconfig.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_KSyntaxHighlighting.pri \
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_accessibility_support_private.pri \
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_bluetooth.pri \
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_bluetooth_private.pri \
@@ -240,6 +248,8 @@ Makefile: lending_system.pro /usr/lib64/qt5/mkspecs/linux-g++/qmake.conf /usr/li
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_glx_support_private.pri \
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_gui.pri \
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_gui_private.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_help.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_help_private.pri \
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_input_support_private.pri \
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_multimedia.pri \
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_multimedia_private.pri \
@@ -284,6 +294,8 @@ Makefile: lending_system.pro /usr/lib64/qt5/mkspecs/linux-g++/qmake.conf /usr/li
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_uiplugin.pri \
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_uitools.pri \
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_uitools_private.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_webchannel.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_webchannel_private.pri \
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_webkit.pri \
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_webkit_private.pri \
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_webkitwidgets.pri \
@@ -296,6 +308,8 @@ Makefile: lending_system.pro /usr/lib64/qt5/mkspecs/linux-g++/qmake.conf /usr/li
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_xkbcommon_support_private.pri \
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_xml.pri \
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_xml_private.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_xmlpatterns.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_xmlpatterns_private.pri \
 		/usr/lib64/qt5/mkspecs/features/qt_functions.prf \
 		/usr/lib64/qt5/mkspecs/features/qt_config.prf \
 		/usr/lib64/qt5/mkspecs/linux-g++/qmake.conf \
@@ -331,6 +345,7 @@ Makefile: lending_system.pro /usr/lib64/qt5/mkspecs/linux-g++/qmake.conf /usr/li
 /usr/lib64/qt5/mkspecs/common/g++-base.conf:
 /usr/lib64/qt5/mkspecs/common/g++-unix.conf:
 /usr/lib64/qt5/mkspecs/qconfig.pri:
+/usr/lib64/qt5/mkspecs/modules/qt_KSyntaxHighlighting.pri:
 /usr/lib64/qt5/mkspecs/modules/qt_lib_accessibility_support_private.pri:
 /usr/lib64/qt5/mkspecs/modules/qt_lib_bluetooth.pri:
 /usr/lib64/qt5/mkspecs/modules/qt_lib_bluetooth_private.pri:
@@ -353,6 +368,8 @@ Makefile: lending_system.pro /usr/lib64/qt5/mkspecs/linux-g++/qmake.conf /usr/li
 /usr/lib64/qt5/mkspecs/modules/qt_lib_glx_support_private.pri:
 /usr/lib64/qt5/mkspecs/modules/qt_lib_gui.pri:
 /usr/lib64/qt5/mkspecs/modules/qt_lib_gui_private.pri:
+/usr/lib64/qt5/mkspecs/modules/qt_lib_help.pri:
+/usr/lib64/qt5/mkspecs/modules/qt_lib_help_private.pri:
 /usr/lib64/qt5/mkspecs/modules/qt_lib_input_support_private.pri:
 /usr/lib64/qt5/mkspecs/modules/qt_lib_multimedia.pri:
 /usr/lib64/qt5/mkspecs/modules/qt_lib_multimedia_private.pri:
@@ -397,6 +414,8 @@ Makefile: lending_system.pro /usr/lib64/qt5/mkspecs/linux-g++/qmake.conf /usr/li
 /usr/lib64/qt5/mkspecs/modules/qt_lib_uiplugin.pri:
 /usr/lib64/qt5/mkspecs/modules/qt_lib_uitools.pri:
 /usr/lib64/qt5/mkspecs/modules/qt_lib_uitools_private.pri:
+/usr/lib64/qt5/mkspecs/modules/qt_lib_webchannel.pri:
+/usr/lib64/qt5/mkspecs/modules/qt_lib_webchannel_private.pri:
 /usr/lib64/qt5/mkspecs/modules/qt_lib_webkit.pri:
 /usr/lib64/qt5/mkspecs/modules/qt_lib_webkit_private.pri:
 /usr/lib64/qt5/mkspecs/modules/qt_lib_webkitwidgets.pri:
@@ -409,6 +428,8 @@ Makefile: lending_system.pro /usr/lib64/qt5/mkspecs/linux-g++/qmake.conf /usr/li
 /usr/lib64/qt5/mkspecs/modules/qt_lib_xkbcommon_support_private.pri:
 /usr/lib64/qt5/mkspecs/modules/qt_lib_xml.pri:
 /usr/lib64/qt5/mkspecs/modules/qt_lib_xml_private.pri:
+/usr/lib64/qt5/mkspecs/modules/qt_lib_xmlpatterns.pri:
+/usr/lib64/qt5/mkspecs/modules/qt_lib_xmlpatterns_private.pri:
 /usr/lib64/qt5/mkspecs/features/qt_functions.prf:
 /usr/lib64/qt5/mkspecs/features/qt_config.prf:
 /usr/lib64/qt5/mkspecs/linux-g++/qmake.conf:

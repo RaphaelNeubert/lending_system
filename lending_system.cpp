@@ -109,8 +109,18 @@ QList<medium*> const& lending_system::get_medlist() const{
     return medlist;
 }
 
-void lending_system::delete_person(unsigned int id){
-    qDebug()<<id;
+//returns false in case person is still lending mediums
+bool lending_system::delete_person(unsigned int id){
+    for (int i=0; i<perlist.size(); i++){
+        if (id == perlist[i]->get_id()){
+            if (perlist[i]->get_numlend() == 0){
+                delete perlist[i];
+                perlist.removeAt(i);
+                return true;
+            }
+        }
+    }
+    return false;
 }
 
 void lending_system::delete_medium(unsigned int id){
@@ -137,10 +147,11 @@ void lending_system::set_lend_true(const QList<unsigned int> &ids, unsigned int 
 void lending_system::set_lend_false(const QList<unsigned int> &ids){
     int count=0;
     int j;
-    //O(n*m) where n...mediums, m...people
+
     for (int i=0; i<medlist.size(); i++){
         if (medlist[i]->get_id() == ids[count]){
             medlist[i]->set_lend(false);
+            //gets person object index once
             if (count == 0){
                 for (j=0; j<perlist.size(); j++){
                     if (perlist[j]->get_id() == medlist[i]->get_person_id()) break;
@@ -148,6 +159,7 @@ void lending_system::set_lend_false(const QList<unsigned int> &ids){
             }
             perlist[j]->dec_numlend();
             medlist[i]->set_person_id(0);
+            //nulldate
             medlist[i]->set_lend_date(QDate());
             count++;
         }
@@ -160,4 +172,22 @@ bool lending_system::check_person(unsigned int id){
         if (perlist[i]->get_id() == id) return true;
     }
     return false;
+}
+
+
+void lending_system::add_person(QString fname, QString lname){
+    unsigned int maxId=0;
+    unsigned int tmpId=0;
+    person* newperson;
+
+    //get max occuring id 
+    for (int i=0; i<perlist.size(); i++){
+        tmpId=perlist[i]->get_id();
+        maxId = maxId<tmpId?tmpId:maxId;
+    }
+    //Id of new person is highest + 1
+    maxId++;
+    
+    newperson = new person(fname, lname, maxId, 0);
+    perlist.append(newperson);
 }

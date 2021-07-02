@@ -17,6 +17,7 @@ class mainwindow: public QMainWindow, public Ui::MainWindow{
         QList<checkbox_t> checkbox_list;
 
         void create_person_table();
+        void delete_person(unsigned int id);
 	public:
 		mainwindow(QMainWindow *parent=0);
 		~mainwindow();
