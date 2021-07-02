@@ -24,6 +24,7 @@ class mainwindow: public QMainWindow, public Ui::MainWindow{
         void create_medium_table();
         void create_lend_table();
         void change_lend_status();
+        void add_person();
 };
 
 #endif

@@ -2,11 +2,13 @@
 #include "lending_system.h"
 #include "book.h"
 #include "cd.h"
+#include "person_dialog.h"
 #include <QDebug>
 #include <QPushButton>
 #include <QCheckBox>
 #include <QInputDialog>
 #include <QMessageBox>
+#include <QApplication>
 
 
 mainwindow::mainwindow(QMainWindow *parent) : QMainWindow(parent){
@@ -16,12 +18,13 @@ mainwindow::mainwindow(QMainWindow *parent) : QMainWindow(parent){
     lend.read_medium();
 
     create_person_table();
-    //refresh table connects
+    //switch table connects on radio state change
     connect(radio_book, &QRadioButton::toggled, this, &mainwindow::create_medium_table);
     connect(radio_lend_true, &QRadioButton::toggled, this, &mainwindow::create_lend_table);
     radio_book->setChecked(true);
     radio_lend_true->setChecked(true);
     connect(lend_button, &QPushButton::clicked, this, &mainwindow::change_lend_status);
+    connect(add_person_btn, &QPushButton::clicked, this, &mainwindow::add_person);
 }
 
 mainwindow::~mainwindow(){
@@ -193,8 +196,6 @@ void mainwindow::create_lend_table(){
     }
 }
 
-
-
 void mainwindow::change_lend_status(){
     QList<unsigned int> ids;
     for (int i=0; i<checkbox_list.size(); i++){
@@ -221,6 +222,11 @@ void mainwindow::change_lend_status(){
         create_lend_table();
         create_person_table();
     }
+}
+
+void mainwindow::add_person(){
+    person_dialog pd;
+    pd.exec();
 }
 
 

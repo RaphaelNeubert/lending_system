@@ -10,8 +10,6 @@ class person{
         unsigned int numlend;
 
     public:
-        person(QString lname);
-        person(QString fname, QString lname);
         person(QString fname, QString lname, unsigned int id, unsigned int numlend);
         QString get_fname();
         QString get_lname();

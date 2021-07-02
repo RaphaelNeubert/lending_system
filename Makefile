@@ -58,7 +58,9 @@ SOURCES       = book.cpp \
 		main.cpp \
 		mainwindow.cpp \
 		medium.cpp \
-		person.cpp moc_mainwindow.cpp
+		person.cpp \
+		person_dialog.cpp moc_mainwindow.cpp \
+		moc_person_dialog.cpp
 OBJECTS       = book.o \
 		cd.o \
 		lending_system.o \
@@ -66,7 +68,9 @@ OBJECTS       = book.o \
 		mainwindow.o \
 		medium.o \
 		person.o \
-		moc_mainwindow.o
+		person_dialog.o \
+		moc_mainwindow.o \
+		moc_person_dialog.o
 DIST          = /usr/lib64/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib64/qt5/mkspecs/common/unix.conf \
 		/usr/lib64/qt5/mkspecs/common/linux.conf \
@@ -129,6 +133,8 @@ DIST          = /usr/lib64/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_quickshapes_private.pri \
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_quickwidgets.pri \
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_quickwidgets_private.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_script.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_script_private.pri \
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_service_support_private.pri \
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_sql.pri \
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_sql_private.pri \
@@ -182,13 +188,16 @@ DIST          = /usr/lib64/qt5/mkspecs/features/spec_pre.prf \
 		mainwindow.h \
 		medium.h \
 		person.h \
-		ui_lending_system.h book.cpp \
+		person_dialog.h \
+		ui_lending_system.h \
+		ui_person_dialog.h book.cpp \
 		cd.cpp \
 		lending_system.cpp \
 		main.cpp \
 		mainwindow.cpp \
 		medium.cpp \
-		person.cpp
+		person.cpp \
+		person_dialog.cpp
 QMAKE_TARGET  = lending_system
 DESTDIR       = 
 TARGET        = lending_system
@@ -197,7 +206,7 @@ TARGET        = lending_system
 first: all
 ####### Build rules
 
-lending_system: ui_lending_system.h $(OBJECTS)  
+lending_system: ui_lending_system.h ui_person_dialog.h $(OBJECTS)  
 	$(LINK) $(LFLAGS) -o $(TARGET) $(OBJECTS) $(OBJCOMP) $(LIBS)
 
 Makefile: lending_system.pro /usr/lib64/qt5/mkspecs/linux-g++/qmake.conf /usr/lib64/qt5/mkspecs/features/spec_pre.prf \
@@ -262,6 +271,8 @@ Makefile: lending_system.pro /usr/lib64/qt5/mkspecs/linux-g++/qmake.conf /usr/li
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_quickshapes_private.pri \
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_quickwidgets.pri \
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_quickwidgets_private.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_script.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_script_private.pri \
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_service_support_private.pri \
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_sql.pri \
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_sql_private.pri \
@@ -373,6 +384,8 @@ Makefile: lending_system.pro /usr/lib64/qt5/mkspecs/linux-g++/qmake.conf /usr/li
 /usr/lib64/qt5/mkspecs/modules/qt_lib_quickshapes_private.pri:
 /usr/lib64/qt5/mkspecs/modules/qt_lib_quickwidgets.pri:
 /usr/lib64/qt5/mkspecs/modules/qt_lib_quickwidgets_private.pri:
+/usr/lib64/qt5/mkspecs/modules/qt_lib_script.pri:
+/usr/lib64/qt5/mkspecs/modules/qt_lib_script_private.pri:
 /usr/lib64/qt5/mkspecs/modules/qt_lib_service_support_private.pri:
 /usr/lib64/qt5/mkspecs/modules/qt_lib_sql.pri:
 /usr/lib64/qt5/mkspecs/modules/qt_lib_sql_private.pri:
@@ -436,9 +449,9 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib64/qt5/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents book.h cd.h lending_system.h mainwindow.h medium.h person.h ui_lending_system.h $(DISTDIR)/
-	$(COPY_FILE) --parents book.cpp cd.cpp lending_system.cpp main.cpp mainwindow.cpp medium.cpp person.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents lending_system.ui $(DISTDIR)/
+	$(COPY_FILE) --parents book.h cd.h lending_system.h mainwindow.h medium.h person.h person_dialog.h ui_lending_system.h ui_person_dialog.h $(DISTDIR)/
+	$(COPY_FILE) --parents book.cpp cd.cpp lending_system.cpp main.cpp mainwindow.cpp medium.cpp person.cpp person_dialog.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents lending_system.ui person_dialog.ui $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -470,9 +483,9 @@ compiler_moc_predefs_clean:
 moc_predefs.h: /usr/lib64/qt5/mkspecs/features/data/dummy.cpp
 	g++ -pipe -O2 -Wall -Wextra -dM -E -o moc_predefs.h /usr/lib64/qt5/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_mainwindow.cpp
+compiler_moc_header_make_all: moc_mainwindow.cpp moc_person_dialog.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_mainwindow.cpp
+	-$(DEL_FILE) moc_mainwindow.cpp moc_person_dialog.cpp
 moc_mainwindow.cpp: mainwindow.h \
 		ui_lending_system.h \
 		lending_system.h \
@@ -482,16 +495,26 @@ moc_mainwindow.cpp: mainwindow.h \
 		/usr/lib64/qt5/bin/moc
 	/usr/lib64/qt5/bin/moc $(DEFINES) --include /home/raphael/htw/prog/beleg/lending_system/moc_predefs.h -I/usr/lib64/qt5/mkspecs/linux-g++ -I/home/raphael/htw/prog/beleg/lending_system -I/home/raphael/htw/prog/beleg/lending_system -I/usr/include/qt5 -I/usr/include/qt5/QtWidgets -I/usr/include/qt5/QtGui -I/usr/include/qt5/QtCore -I/usr/lib/gcc/x86_64-pc-linux-gnu/10.3.0/include/g++-v10 -I/usr/lib/gcc/x86_64-pc-linux-gnu/10.3.0/include/g++-v10/x86_64-pc-linux-gnu -I/usr/lib/gcc/x86_64-pc-linux-gnu/10.3.0/include/g++-v10/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/10.3.0/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/10.3.0/include-fixed -I/usr/include mainwindow.h -o moc_mainwindow.cpp
 
+moc_person_dialog.cpp: person_dialog.h \
+		ui_person_dialog.h \
+		moc_predefs.h \
+		/usr/lib64/qt5/bin/moc
+	/usr/lib64/qt5/bin/moc $(DEFINES) --include /home/raphael/htw/prog/beleg/lending_system/moc_predefs.h -I/usr/lib64/qt5/mkspecs/linux-g++ -I/home/raphael/htw/prog/beleg/lending_system -I/home/raphael/htw/prog/beleg/lending_system -I/usr/include/qt5 -I/usr/include/qt5/QtWidgets -I/usr/include/qt5/QtGui -I/usr/include/qt5/QtCore -I/usr/lib/gcc/x86_64-pc-linux-gnu/10.3.0/include/g++-v10 -I/usr/lib/gcc/x86_64-pc-linux-gnu/10.3.0/include/g++-v10/x86_64-pc-linux-gnu -I/usr/lib/gcc/x86_64-pc-linux-gnu/10.3.0/include/g++-v10/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/10.3.0/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/10.3.0/include-fixed -I/usr/include person_dialog.h -o moc_person_dialog.cpp
+
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
-compiler_uic_make_all: ui_lending_system.h
+compiler_uic_make_all: ui_lending_system.h ui_person_dialog.h
 compiler_uic_clean:
-	-$(DEL_FILE) ui_lending_system.h
+	-$(DEL_FILE) ui_lending_system.h ui_person_dialog.h
 ui_lending_system.h: lending_system.ui \
 		/usr/lib64/qt5/bin/uic
 	/usr/lib64/qt5/bin/uic lending_system.ui -o ui_lending_system.h
+
+ui_person_dialog.h: person_dialog.ui \
+		/usr/lib64/qt5/bin/uic
+	/usr/lib64/qt5/bin/uic person_dialog.ui -o ui_person_dialog.h
 
 compiler_yacc_decl_make_all:
 compiler_yacc_decl_clean:
@@ -531,7 +554,9 @@ mainwindow.o: mainwindow.cpp mainwindow.h \
 		medium.h \
 		person.h \
 		book.h \
-		cd.h
+		cd.h \
+		person_dialog.h \
+		ui_person_dialog.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o mainwindow.cpp
 
 medium.o: medium.cpp medium.h
@@ -540,8 +565,15 @@ medium.o: medium.cpp medium.h
 person.o: person.cpp person.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o person.o person.cpp
 
+person_dialog.o: person_dialog.cpp person_dialog.h \
+		ui_person_dialog.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o person_dialog.o person_dialog.cpp
+
 moc_mainwindow.o: moc_mainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainwindow.o moc_mainwindow.cpp
+
+moc_person_dialog.o: moc_person_dialog.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_person_dialog.o moc_person_dialog.cpp
 
 ####### Install
 

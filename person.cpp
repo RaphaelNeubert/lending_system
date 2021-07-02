@@ -1,15 +1,6 @@
 #include "person.h"
 #include <QString>
 
-person::person(QString lname){
-    this->lname=lname;
-    numlend=0;
-}
-person::person(QString fname, QString lname){
-    this->lname=lname;
-    this->fname=fname;
-    numlend=0;
-}
 person::person(QString fname, QString lname, unsigned int id, unsigned int numlend) : fname(fname), lname(lname),
                                                                                       id(id), numlend(numlend) {
 }
