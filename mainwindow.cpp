@@ -3,6 +3,7 @@
 #include "book.h"
 #include "cd.h"
 #include "person_dialog.h"
+#include "medium_dialog.h"
 #include <QDebug>
 #include <QPushButton>
 #include <QCheckBox>
@@ -25,6 +26,7 @@ mainwindow::mainwindow(QMainWindow *parent) : QMainWindow(parent){
     radio_lend_true->setChecked(true);
     connect(lend_button, &QPushButton::clicked, this, &mainwindow::change_lend_status);
     connect(add_person_btn, &QPushButton::clicked, this, &mainwindow::add_person);
+    connect(add_medium_btn, &QPushButton::clicked, this, &mainwindow::add_medium);
 }
 
 mainwindow::~mainwindow(){
@@ -154,9 +156,6 @@ void mainwindow::create_lend_table(){
             checkbox_struct.checkbox = tmp;
             checkbox_list.append(checkbox_struct);
 
-            //qDebug()<<checkbox_list[count].id;
-            //qDebug()<<checkbox_list[count].checkbox->checkState();
-
             //id
             tmp = new QTableWidgetItem(QString::number(vlist[i]->get_id()));
             tmp->setTextAlignment(Qt::AlignCenter);
@@ -252,3 +251,11 @@ void mainwindow::delete_person(unsigned int id){
     create_person_table();
 }
 
+void mainwindow::add_medium(){
+    medium_dialog md;
+
+    //executes medium dialog window
+    if (md.exec() == QDialog::Accepted){
+        create_medium_table();
+    }
+}

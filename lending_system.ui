@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="tab_lend">
      <attribute name="title">
@@ -145,6 +145,19 @@
         <string>CD</string>
        </property>
       </widget>
+     </widget>
+     <widget class="QPushButton" name="add_medium_btn">
+      <property name="geometry">
+       <rect>
+        <x>660</x>
+        <y>0</y>
+        <width>131</width>
+        <height>61</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Medium Hinzufügen</string>
+      </property>
      </widget>
     </widget>
     <widget class="QWidget" name="tab_person">

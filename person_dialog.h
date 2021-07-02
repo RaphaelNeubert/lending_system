@@ -7,7 +7,6 @@
 class person_dialog : public QDialog, public Ui::Dialog{
     Q_OBJECT
     private:
-//Ui::person_dialog *ui;
     public:
         person_dialog(QWidget* parent=nullptr);
         ~person_dialog();
