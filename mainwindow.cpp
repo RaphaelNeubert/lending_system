@@ -89,9 +89,9 @@ void mainwindow::create_medium_table(){
             //publisher
             medium_table->setItem(count,3, new QTableWidgetItem(((book*)mlist[i])->get_publisher()));
             //button to delete the book 
-            QPushButton* btn= new QPushButton("delete"); //OPTIONAL TODO Add icon as ctor argument
+            QPushButton* btn= new QPushButton("Löschen"); //OPTIONAL TODO Add icon as ctor argument
             //connect buttons using lambda
-            connect(btn, &QPushButton::clicked, this, [this,i,mlist]() { lend.delete_medium(mlist[i]->get_id()); });
+            connect(btn, &QPushButton::clicked, this, [this,i,mlist]() { delete_medium(mlist[i]->get_id()); });
             medium_table->setCellWidget(count,4,btn);
             count++;
         }
@@ -108,9 +108,9 @@ void mainwindow::create_medium_table(){
             //publisher
             medium_table->setItem(count,3, new QTableWidgetItem(((cd*)mlist[i])->get_producer()));
             //button to delete the book 
-            QPushButton* btn= new QPushButton("delete"); //OPTIONAL TODO Add icon as ctor argument
+            QPushButton* btn= new QPushButton("Löschen"); //OPTIONAL TODO Add icon as ctor argument
             //connect buttons using lambda
-            connect(btn, &QPushButton::clicked, this, [this,i,mlist]() { lend.delete_medium(mlist[i]->get_id()); });
+            connect(btn, &QPushButton::clicked, this, [this,i,mlist]() { delete_medium(mlist[i]->get_id()); });
             medium_table->setCellWidget(count,4,btn);
             count++;
         }
@@ -257,11 +257,43 @@ void mainwindow::delete_person(unsigned int id){
     create_person_table();
 }
 
+void mainwindow::delete_medium(unsigned int id){
+    if (!lend.delete_medium(id)){
+        QMessageBox::warning(this,"Fehler", "Medien die noch verliehen sind können nicht gelöcht werden");
+        return;
+    }
+    create_medium_table();
+}
+
 void mainwindow::add_medium(){
     medium_dialog md;
+    QString title;
+    QString type;
+    QString field1;
+    QString field2;
 
-    //executes medium dialog window
+    //executes person dialog window
     if (md.exec() == QDialog::Accepted){
-        create_medium_table();
+        title = md.get_title();
+        while(title.length() == 0){
+            QMessageBox::warning(this,"Fehler", "Das Feld \"Titel\" darf nicht leer sein.");
+            if (md.exec() == QDialog::Accepted){
+                title = md.get_title();
+            }
+            else{
+                return;
+            }
+        }
+        type = md.get_type();
+        field1 = md.get_type_field1();
+        field2 = md.get_type_field2();
+
+        if (type == "book"){
+            lend.add_book(title, field1, field2);
+        }
+        else{
+            lend.add_cd(title, field1, field2);
+        }
+            create_medium_table();
     }
 }

@@ -18,6 +18,7 @@ class mainwindow: public QMainWindow, public Ui::MainWindow{
 
         void create_person_table();
         void delete_person(unsigned int id);
+        void delete_medium(unsigned int id);
 	public:
 		mainwindow(QMainWindow *parent=0);
 		~mainwindow();

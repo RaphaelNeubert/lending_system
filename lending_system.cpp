@@ -123,8 +123,18 @@ bool lending_system::delete_person(unsigned int id){
     return false;
 }
 
-void lending_system::delete_medium(unsigned int id){
-    qDebug()<<id;
+//returns false in case medium is still lended
+bool lending_system::delete_medium(unsigned int id){
+    for (int i=0; i<medlist.size(); i++){
+        if (id == medlist[i]->get_id()){
+            if (!medlist[i]->get_lend()){
+                delete medlist[i];
+                medlist.removeAt(i);
+                return true;
+            }
+        }
+    }
+    return false;
 }
 
 void lending_system::set_lend_true(const QList<unsigned int> &ids, unsigned int person_id){
@@ -190,4 +200,37 @@ void lending_system::add_person(QString fname, QString lname){
     
     newperson = new person(fname, lname, maxId, 0);
     perlist.append(newperson);
+}
+
+void lending_system::add_book(QString title, QString author, QString publisher){
+    unsigned int maxId=0;
+    unsigned int tmpId=0;
+    book* newbook;
+
+    //get max occuring id 
+    for (int i=0; i<medlist.size(); i++){
+        tmpId=medlist[i]->get_id();
+        maxId = maxId<tmpId?tmpId:maxId;
+    }
+    //new ID
+    maxId++;
+
+    newbook = new book(title, author, publisher, maxId, false, 0, QDate());
+    medlist.append((medium*)newbook);
+}
+void lending_system::add_cd(QString title, QString artist, QString producer){
+    unsigned int maxId=0;
+    unsigned int tmpId=0;
+    cd* newcd;
+
+    //get max occuring id 
+    for (int i=0; i<medlist.size(); i++){
+        tmpId=medlist[i]->get_id();
+        maxId = maxId<tmpId?tmpId:maxId;
+    }
+    //new ID
+    maxId++;
+
+    newcd = new cd(title, artist, producer, maxId, false, 0, QDate());
+    medlist.append((medium*)newcd);
 }
