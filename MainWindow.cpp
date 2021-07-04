@@ -12,7 +12,7 @@
 #include <QApplication>
 
 
-MainWindow::MainWindow(QMainWindow *parent) : QMainWindow(parent){
+MainWindow::MainWindow(QMainWindow *parent) : QMainWindow(parent), ui(new Ui::MainWindow){
     ui->setupUi(this);
 
     create_person_table();
