@@ -27,6 +27,7 @@ MainWindow::MainWindow(QMainWindow *parent) : QMainWindow(parent), ui(new Ui::Ma
 }
 
 MainWindow::~MainWindow(){
+    delete ui;
 }
 
 void MainWindow::create_person_table(){

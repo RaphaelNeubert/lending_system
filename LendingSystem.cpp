@@ -4,6 +4,7 @@
 #include <QString>
 #include <QDebug>
 #include <QDate>
+#include <QMessageBox>
 #include <iostream>
 #include <QtAlgorithms>
 #include "LendingSystem.h"
@@ -19,22 +20,30 @@ LendingSystem::LendingSystem(){
 LendingSystem::~LendingSystem(){
     write_person();      //from QList to file
     write_medium();
-    qDeleteAll(perlist);
+
+    //frees the pointers in the list and deletes the list elements
+    for (int i=0; i<perlist.size(); i++){
+        delete perlist[i];
+    }
     perlist.clear();
-    qDeleteAll(medlist);
+    for (int i=0; i<medlist.size(); i++){
+        delete medlist[i];
+    }
     medlist.clear();
 }
 
 void LendingSystem::read_medium(){
     QFile f("medium.csv");
+    QStringList fields;
+    QString line;
     if (!f.open(QIODevice::ReadOnly)){
-        //TODO error message
+        QMessageBox::critical(0,"Error","Die Datei \"medium.csv\" konnte nicht gefunden werden.");
         return;
     }
     QTextStream in(&f);
     while (!in.atEnd()){
-        QString line = in.readLine();
-        QStringList fields = line.split(";");
+        line = in.readLine();
+        fields = line.split(";");
         if (fields[0]=="book"){
             //creates new book instance on heap
             Book* b = new Book(fields[1],fields[2],fields[3],fields[4].toUInt(),fields[5].toInt(),
@@ -46,7 +55,6 @@ void LendingSystem::read_medium(){
             Cd* c = new Cd(fields[1],fields[2],fields[3],fields[4].toUInt(),fields[5].toInt(),fields[6].toUInt(),
                            QDate::fromString(fields[7]));
             medlist.append((Medium*)c);
-
         }
     }
     f.close();
@@ -54,14 +62,17 @@ void LendingSystem::read_medium(){
 
 void LendingSystem::read_person(){
     QFile f("person.csv");
+    QStringList fields;
+    QString line;
+
     if (!f.open(QIODevice::ReadOnly)){
-        //TODO error message
+        QMessageBox::critical(0,"Error","Die Datei \"person.csv\" konnte nicht gefunden werden.");
         return;
     }
     QTextStream in(&f);
     while (!in.atEnd()) {
-        QString line = in.readLine();
-        QStringList fields = line.split(";");
+        line = in.readLine();
+        fields = line.split(";");
         Person* p = new Person(fields[0], fields[1], fields[2].toUInt(), fields[3].toUInt());
         perlist.append(p);
     }
