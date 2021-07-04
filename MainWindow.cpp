@@ -15,9 +15,6 @@
 MainWindow::MainWindow(QMainWindow *parent) : QMainWindow(parent){
     ui->setupUi(this);
 
-    lend.read_person();     //from file to QList
-    lend.read_medium();
-
     create_person_table();
     //switch table connects on radio state change
     connect(ui->radio_book, &QRadioButton::toggled, this, &MainWindow::create_medium_table);
@@ -30,8 +27,6 @@ MainWindow::MainWindow(QMainWindow *parent) : QMainWindow(parent){
 }
 
 MainWindow::~MainWindow(){
-    lend.write_person();    //from QList to file
-    lend.write_medium();
 }
 
 void MainWindow::create_person_table(){

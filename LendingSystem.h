@@ -11,13 +11,15 @@ class LendingSystem{
     private:
         QList<Medium*> medlist; //saves all medium objects
         QList<Person*> perlist; //saves all person objects
-    
-    public:
-        LendingSystem();
+
         void read_medium();     //loads mediums from file into QList
         void read_person();     //loads persons from file into QList
         void write_medium();    //saves mediums from QList into file
         void write_person();    //saves persons from QList into file
+    
+    public:
+        LendingSystem();
+        ~LendingSystem();
 
         //gives save access to lists
         QList<Person*> const& get_perlist() const;

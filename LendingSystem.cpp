@@ -11,6 +11,13 @@
 #include "Cd.h"
 
 LendingSystem::LendingSystem(){
+    read_person();      //from file to QList
+    read_medium();
+}
+
+LendingSystem::~LendingSystem(){
+    write_person();      //from QList to file
+    write_medium();
 }
 
 void LendingSystem::read_medium(){
