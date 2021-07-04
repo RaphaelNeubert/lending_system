@@ -67,6 +67,7 @@ void mainwindow::create_medium_table(){
     int n=mlist.size();
     int count=0;
     QStringList colNames;
+    QTableWidgetItem* tmp;
     //deletes table contents
     medium_table->setRowCount(0);
     if (radio_book->isChecked()) colNames<<"ID"<<"Titel"<<"Autor"<<"Verlag"<<"";
@@ -79,9 +80,9 @@ void mainwindow::create_medium_table(){
         if (mlist[i]->get_type() == "book" && radio_book->isChecked()){
             medium_table->insertRow(medium_table->rowCount()); //Append row
             //id
-            QTableWidgetItem* tmp = new QTableWidgetItem(QString::number(mlist[i]->get_id()));
+            tmp = new QTableWidgetItem(QString::number(mlist[i]->get_id()));
             tmp->setTextAlignment(Qt::AlignCenter);
-            medium_table->setItem(i,0, tmp);
+            medium_table->setItem(count,0, tmp);
             //title
             medium_table->setItem(count,1, new QTableWidgetItem(mlist[i]->get_title()));
             //author
@@ -89,7 +90,7 @@ void mainwindow::create_medium_table(){
             //publisher
             medium_table->setItem(count,3, new QTableWidgetItem(((book*)mlist[i])->get_publisher()));
             //button to delete the book 
-            QPushButton* btn= new QPushButton("Löschen"); //OPTIONAL TODO Add icon as ctor argument
+            QPushButton* btn= new QPushButton("Löschen");
             //connect buttons using lambda
             connect(btn, &QPushButton::clicked, this, [this,i,mlist]() { delete_medium(mlist[i]->get_id()); });
             medium_table->setCellWidget(count,4,btn);
@@ -98,7 +99,7 @@ void mainwindow::create_medium_table(){
         else if (mlist[i]->get_type() == "cd" && radio_cd->isChecked()){
             medium_table->insertRow(medium_table->rowCount()); //Append row
             //id
-            QTableWidgetItem* tmp = new QTableWidgetItem(QString::number(mlist[i]->get_id()));
+            tmp = new QTableWidgetItem(QString::number(mlist[i]->get_id()));
             tmp->setTextAlignment(Qt::AlignCenter);
             medium_table->setItem(count,0, tmp);
             //title
@@ -108,7 +109,7 @@ void mainwindow::create_medium_table(){
             //publisher
             medium_table->setItem(count,3, new QTableWidgetItem(((cd*)mlist[i])->get_producer()));
             //button to delete the book 
-            QPushButton* btn= new QPushButton("Löschen"); //OPTIONAL TODO Add icon as ctor argument
+            QPushButton* btn= new QPushButton("Löschen");
             //connect buttons using lambda
             connect(btn, &QPushButton::clicked, this, [this,i,mlist]() { delete_medium(mlist[i]->get_id()); });
             medium_table->setCellWidget(count,4,btn);
