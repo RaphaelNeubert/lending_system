@@ -168,12 +168,14 @@ void LendingSystem::set_lend_true(const QList<unsigned int> &ids, unsigned int p
         if (perlist[j]->get_id() == person_id) break;
     }
     for (int i=0; i<medlist.size(); i++){
-        if (medlist[i]->get_id() == ids[count]){
-            medlist[i]->set_lend(true);
-            perlist[j]->inc_numlend();
-            medlist[i]->set_person_id(person_id);
-            medlist[i]->set_lend_date(QDate::currentDate());
-            count++;
+        if (count < ids.size()){
+            if (medlist[i]->get_id() == ids[count]){
+                medlist[i]->set_lend(true);
+                perlist[j]->inc_numlend();
+                medlist[i]->set_person_id(person_id);
+                medlist[i]->set_lend_date(QDate::currentDate());
+                count++;
+            }
         }
     }
 }
@@ -182,19 +184,21 @@ void LendingSystem::set_lend_false(const QList<unsigned int> &ids){
     int j;
 
     for (int i=0; i<medlist.size(); i++){
-        if (medlist[i]->get_id() == ids[count]){
-            medlist[i]->set_lend(false);
-            //gets person object index once
-            if (count == 0){
-                for (j=0; j<perlist.size(); j++){
-                    if (perlist[j]->get_id() == medlist[i]->get_person_id()) break;
+        if (count < ids.size()){
+            if (medlist[i]->get_id() == ids[count]){
+                medlist[i]->set_lend(false);
+                //gets person object index once
+                if (count == 0){
+                    for (j=0; j<perlist.size(); j++){
+                        if (perlist[j]->get_id() == medlist[i]->get_person_id()) break;
+                    }
                 }
+                perlist[j]->dec_numlend();
+                medlist[i]->set_person_id(0);
+                //nulldate
+                medlist[i]->set_lend_date(QDate());
+                count++;
             }
-            perlist[j]->dec_numlend();
-            medlist[i]->set_person_id(0);
-            //nulldate
-            medlist[i]->set_lend_date(QDate());
-            count++;
         }
     }
 }

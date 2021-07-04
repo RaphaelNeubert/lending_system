@@ -210,7 +210,6 @@ void MainWindow::change_lend_status(){
         if (!lend.check_person(person_id)){
             QString msg="Die Person mit der ID "+QString::number(person_id)+" konnte nicht gefunden werden.";
             QMessageBox::warning(this,"Person nicht gefunden!", msg); 
-            //Optional TODO add person button
             return;
         }
         lend.set_lend_true(ids, person_id);
