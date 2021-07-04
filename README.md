@@ -6,8 +6,8 @@
 * qttools5-dev-tools
 
 ## Build Instructions
-qmake -project "QT += widgets"
-qmake
+qmake -project "QT += widgets" <br />
+qmake<br />
 make
 
 ## Developed with
