@@ -1,7 +1,7 @@
 #include "MainWindow.h"
-#include "lending_system.h"
-#include "book.h"
-#include "cd.h"
+#include "LendingSystem.h"
+#include "Book.h"
+#include "Cd.h"
 #include "PersonDialog.h"
 #include "MediumDialog.h"
 #include <QDebug>
@@ -35,7 +35,7 @@ MainWindow::~MainWindow(){
 }
 
 void MainWindow::create_person_table(){
-    const QList<person*> plist=lend.get_perlist();
+    const QList<Person*> plist=lend.get_perlist();
     int n=plist.size();
     ui->person_table->setRowCount(n);
     ui->person_table->verticalHeader()->setVisible(false); //removes row index
@@ -63,7 +63,7 @@ void MainWindow::create_person_table(){
 }
 
 void MainWindow::create_medium_table(){
-    const QList<medium*> mlist = lend.get_medlist();
+    const QList<Medium*> mlist = lend.get_medlist();
     int n=mlist.size();
     int count=0;
     QStringList colNames;
@@ -86,9 +86,9 @@ void MainWindow::create_medium_table(){
             //title
             ui->medium_table->setItem(count,1, new QTableWidgetItem(mlist[i]->get_title()));
             //author
-            ui->medium_table->setItem(count,2, new QTableWidgetItem(((book*)mlist[i])->get_author()));
+            ui->medium_table->setItem(count,2, new QTableWidgetItem(((Book*)mlist[i])->get_author()));
             //publisher
-            ui->medium_table->setItem(count,3, new QTableWidgetItem(((book*)mlist[i])->get_publisher()));
+            ui->medium_table->setItem(count,3, new QTableWidgetItem(((Book*)mlist[i])->get_publisher()));
             //button to delete the book 
             QPushButton* btn= new QPushButton("Löschen");
             //connect buttons using lambda
@@ -105,9 +105,9 @@ void MainWindow::create_medium_table(){
             //title
             ui->medium_table->setItem(count,1, new QTableWidgetItem(mlist[i]->get_title()));
             //author
-            ui->medium_table->setItem(count,2, new QTableWidgetItem(((cd*)mlist[i])->get_artist()));
+            ui->medium_table->setItem(count,2, new QTableWidgetItem(((Cd*)mlist[i])->get_artist()));
             //publisher
-            ui->medium_table->setItem(count,3, new QTableWidgetItem(((cd*)mlist[i])->get_producer()));
+            ui->medium_table->setItem(count,3, new QTableWidgetItem(((Cd*)mlist[i])->get_producer()));
             //button to delete the book 
             QPushButton* btn= new QPushButton("Löschen");
             //connect buttons using lambda
@@ -119,7 +119,7 @@ void MainWindow::create_medium_table(){
 }
 
 void MainWindow::create_lend_table(){
-    const QList<medium*> vlist = lend.get_medlist();
+    const QList<Medium*> vlist = lend.get_medlist();
     int n=vlist.size();
     int count=0;
     QStringList colNames;

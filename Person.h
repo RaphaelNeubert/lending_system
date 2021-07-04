@@ -2,7 +2,7 @@
 #define PERSON_h
 #include <QString>
 
-class person{
+class Person{
     private:
         QString fname;
         QString lname;
@@ -10,7 +10,7 @@ class person{
         unsigned int numlend;
 
     public:
-        person(QString fname, QString lname, unsigned int id, unsigned int numlend);
+        Person(QString fname, QString lname, unsigned int id, unsigned int numlend);
         QString get_fname();
         QString get_lname();
         unsigned int get_id();

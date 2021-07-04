@@ -1,16 +1,16 @@
 #ifndef CD_H
 #define CD_H
 
-#include "medium.h"
+#include "Medium.h"
 #include <QString>
 
-class cd: public medium{
+class Cd: public Medium{
     private:
         QString artist;
         QString producer;
     
     public:
-        cd(QString title, QString artist, QString producer, unsigned int id, bool lend, unsigned int person_id, QDate lend_date);
+        Cd(QString title, QString artist, QString producer, unsigned int id, bool lend, unsigned int person_id, QDate lend_date);
         QString get_artist();
         QString get_producer();
 };

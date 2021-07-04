@@ -2,7 +2,7 @@
 #include <QDebug>
 
 
-MediumDialog::MediumDialog(QWidget *parent) : QDialog(parent){
+MediumDialog::MediumDialog(QWidget *parent) : QDialog(parent), ui(new Ui::MediumDialog){
     ui->setupUi(this);
     //connect QComboBox using lambda
     connect(ui->type_select, QOverload<int>::of(&QComboBox::activated),

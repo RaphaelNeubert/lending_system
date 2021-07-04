@@ -5,15 +5,15 @@
 #include <QDebug>
 #include <QDate>
 #include <iostream>
-#include "lending_system.h"
-#include "book.h"
-#include "person.h"
-#include "cd.h"
+#include "LendingSystem.h"
+#include "Book.h"
+#include "Person.h"
+#include "Cd.h"
 
-lending_system::lending_system(){
+LendingSystem::LendingSystem(){
 }
 
-void lending_system::read_medium(){
+void LendingSystem::read_medium(){
     QFile f("medium.csv");
     if (!f.open(QIODevice::ReadOnly)){
         //TODO error message
@@ -25,22 +25,22 @@ void lending_system::read_medium(){
         QStringList fields = line.split(";");
         if (fields[0]=="book"){
             //creates new book instance on heap
-            book* b = new book(fields[1],fields[2],fields[3],fields[4].toUInt(),fields[5].toInt(),
+            Book* b = new Book(fields[1],fields[2],fields[3],fields[4].toUInt(),fields[5].toInt(),
                                fields[6].toUInt(),QDate::fromString(fields[7], QString("dd.MM.yyyy")));
             //adds book to list
-            medlist.append((medium*)b);
+            medlist.append((Medium*)b);
         }
         else if (fields[0]=="cd"){
-            cd* c = new cd(fields[1],fields[2],fields[3],fields[4].toUInt(),fields[5].toInt(),fields[6].toUInt(),
+            Cd* c = new Cd(fields[1],fields[2],fields[3],fields[4].toUInt(),fields[5].toInt(),fields[6].toUInt(),
                            QDate::fromString(fields[7]));
-            medlist.append((medium*)c);
+            medlist.append((Medium*)c);
 
         }
     }
     f.close();
 }
 
-void lending_system::read_person(){
+void LendingSystem::read_person(){
     QFile f("person.csv");
     if (!f.open(QIODevice::ReadOnly)){
         //TODO error message
@@ -50,13 +50,13 @@ void lending_system::read_person(){
     while (!in.atEnd()) {
         QString line = in.readLine();
         QStringList fields = line.split(";");
-        person* p = new person(fields[0], fields[1], fields[2].toUInt(), fields[3].toUInt());
+        Person* p = new Person(fields[0], fields[1], fields[2].toUInt(), fields[3].toUInt());
         perlist.append(p);
     }
     f.close();
 }
 
-void lending_system::write_person(){
+void LendingSystem::write_person(){
     QFile f("person.csv");
     QString line;
 
@@ -72,7 +72,7 @@ void lending_system::write_person(){
     f.close();
 }
 
-void lending_system::write_medium(){
+void LendingSystem::write_medium(){
     QFile f("medium.csv");
     QString line;
 
@@ -83,15 +83,15 @@ void lending_system::write_medium(){
     for (int i=0; i<medlist.size(); i++){
         //creates one line for the csv file
         if (medlist[i]->get_type()=="book"){
-            line = medlist[i]->get_type()+';'+medlist[i]->get_title()+';'+((book*)medlist[i])->get_author()+';'
-                +((book*)medlist[i])->get_publisher()+';'+QString::number(medlist[i]->get_id())+';'
+            line = medlist[i]->get_type()+';'+medlist[i]->get_title()+';'+((Book*)medlist[i])->get_author()+';'
+                +((Book*)medlist[i])->get_publisher()+';'+QString::number(medlist[i]->get_id())+';'
                 +QString::number(medlist[i]->get_lend())+';'+QString::number(medlist[i]->get_person_id())+';'
                 +medlist[i]->get_lend_date().toString(QString("dd.MM.yyyy"))+'\n';
         }
 
         else if (medlist[i]->get_type()=="cd"){
-            line = medlist[i]->get_type()+';'+medlist[i]->get_title()+';'+((cd*)medlist[i])->get_artist()+';'
-                +((cd*)medlist[i])->get_producer()+';'+QString::number(medlist[i]->get_id())+';'
+            line = medlist[i]->get_type()+';'+medlist[i]->get_title()+';'+((Cd*)medlist[i])->get_artist()+';'
+                +((Cd*)medlist[i])->get_producer()+';'+QString::number(medlist[i]->get_id())+';'
                 +QString::number(medlist[i]->get_lend())+';'+QString::number(medlist[i]->get_person_id())+';'
                 +medlist[i]->get_lend_date().toString(QString("dd.MM.yyyy"))+'\n';
         }
@@ -101,16 +101,16 @@ void lending_system::write_medium(){
 }
 
 
-QList<person*> const& lending_system::get_perlist() const{
+QList<Person*> const& LendingSystem::get_perlist() const{
     return perlist;
 }
 
-QList<medium*> const& lending_system::get_medlist() const{
+QList<Medium*> const& LendingSystem::get_medlist() const{
     return medlist;
 }
 
 //returns false in case person is still lending mediums
-bool lending_system::delete_person(unsigned int id){
+bool LendingSystem::delete_person(unsigned int id){
     for (int i=0; i<perlist.size(); i++){
         if (id == perlist[i]->get_id()){
             if (perlist[i]->get_numlend() == 0){
@@ -124,7 +124,7 @@ bool lending_system::delete_person(unsigned int id){
 }
 
 //returns false in case medium is still lended
-bool lending_system::delete_medium(unsigned int id){
+bool LendingSystem::delete_medium(unsigned int id){
     for (int i=0; i<medlist.size(); i++){
         if (id == medlist[i]->get_id()){
             if (!medlist[i]->get_lend()){
@@ -137,7 +137,7 @@ bool lending_system::delete_medium(unsigned int id){
     return false;
 }
 
-void lending_system::set_lend_true(const QList<unsigned int> &ids, unsigned int person_id){
+void LendingSystem::set_lend_true(const QList<unsigned int> &ids, unsigned int person_id){
     int count=0;
     int j;
 
@@ -154,7 +154,7 @@ void lending_system::set_lend_true(const QList<unsigned int> &ids, unsigned int 
         }
     }
 }
-void lending_system::set_lend_false(const QList<unsigned int> &ids){
+void LendingSystem::set_lend_false(const QList<unsigned int> &ids){
     int count=0;
     int j;
 
@@ -177,7 +177,7 @@ void lending_system::set_lend_false(const QList<unsigned int> &ids){
 }
 
 
-bool lending_system::check_person(unsigned int id){
+bool LendingSystem::check_person(unsigned int id){
     for (int i=0; i<perlist.size(); i++){
         if (perlist[i]->get_id() == id) return true;
     }
@@ -185,10 +185,10 @@ bool lending_system::check_person(unsigned int id){
 }
 
 
-void lending_system::add_person(QString fname, QString lname){
+void LendingSystem::add_person(QString fname, QString lname){
     unsigned int maxId=0;
     unsigned int tmpId=0;
-    person* newperson;
+    Person* newperson;
 
     //get max occuring id 
     for (int i=0; i<perlist.size(); i++){
@@ -198,14 +198,14 @@ void lending_system::add_person(QString fname, QString lname){
     //Id of new person is highest + 1
     maxId++;
     
-    newperson = new person(fname, lname, maxId, 0);
+    newperson = new Person(fname, lname, maxId, 0);
     perlist.append(newperson);
 }
 
-void lending_system::add_book(QString title, QString author, QString publisher){
+void LendingSystem::add_book(QString title, QString author, QString publisher){
     unsigned int maxId=0;
     unsigned int tmpId=0;
-    book* newbook;
+    Book* newbook;
 
     //get max occuring id 
     for (int i=0; i<medlist.size(); i++){
@@ -215,13 +215,13 @@ void lending_system::add_book(QString title, QString author, QString publisher){
     //new ID
     maxId++;
 
-    newbook = new book(title, author, publisher, maxId, false, 0, QDate());
-    medlist.append((medium*)newbook);
+    newbook = new Book(title, author, publisher, maxId, false, 0, QDate());
+    medlist.append((Medium*)newbook);
 }
-void lending_system::add_cd(QString title, QString artist, QString producer){
+void LendingSystem::add_cd(QString title, QString artist, QString producer){
     unsigned int maxId=0;
     unsigned int tmpId=0;
-    cd* newcd;
+    Cd* newcd;
 
     //get max occuring id 
     for (int i=0; i<medlist.size(); i++){
@@ -231,6 +231,6 @@ void lending_system::add_cd(QString title, QString artist, QString producer){
     //new ID
     maxId++;
 
-    newcd = new cd(title, artist, producer, maxId, false, 0, QDate());
-    medlist.append((medium*)newcd);
+    newcd = new Cd(title, artist, producer, maxId, false, 0, QDate());
+    medlist.append((Medium*)newcd);
 }

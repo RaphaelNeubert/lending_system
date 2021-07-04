@@ -3,7 +3,7 @@
 #include <QString>
 #include <QDate>
 
-class medium{
+class Medium{
     private:
         QString title;
         QString type;
@@ -13,8 +13,8 @@ class medium{
         QDate lend_date;
 
     public:
-        medium(QString title, QString type);
-        medium(QString title, QString type, unsigned int id, bool lend, unsigned int person_id, QDate lend_date);
+        Medium(QString title, QString type);
+        Medium(QString title, QString type, unsigned int id, bool lend, unsigned int person_id, QDate lend_date);
         QString get_title();
         QString get_type();
         unsigned int get_id();

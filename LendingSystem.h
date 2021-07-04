@@ -3,25 +3,25 @@
 
 #include <QList>
 #include <QTableWidgetItem>
-#include "medium.h"
-#include "person.h"
+#include "Medium.h"
+#include "Person.h"
 
 
-class lending_system{
+class LendingSystem{
     private:
-        QList<medium*> medlist; //saves all medium objects
-        QList<person*> perlist; //saves all person objects
+        QList<Medium*> medlist; //saves all medium objects
+        QList<Person*> perlist; //saves all person objects
     
     public:
-        lending_system();
+        LendingSystem();
         void read_medium();     //loads mediums from file into QList
         void read_person();     //loads persons from file into QList
         void write_medium();    //saves mediums from QList into file
         void write_person();    //saves persons from QList into file
 
         //gives save access to lists
-        QList<person*> const& get_perlist() const;
-        QList<medium*> const& get_medlist() const;
+        QList<Person*> const& get_perlist() const;
+        QList<Medium*> const& get_medlist() const;
 
         void add_person(QString fname, QString lname); //adds person to perlist
         void add_book(QString title, QString author, QString publisher); //adds book to medlist

@@ -1,7 +1,7 @@
 #ifndef MAINWINDOW_H 
 #define MAINWINDOW_H 
 #include "ui_MainWindow.h"
-#include "lending_system.h"
+#include "LendingSystem.h"
 
 struct checkbox_t{
     unsigned int id;
@@ -17,7 +17,7 @@ class MainWindow: public QMainWindow{
     private:
         Ui::MainWindow* ui;
         //background stuff
-        lending_system lend;
+        LendingSystem lend;
         //used to access checkbox states later on
         QList<checkbox_t> checkbox_list;
 
