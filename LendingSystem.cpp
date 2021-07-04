@@ -5,6 +5,7 @@
 #include <QDebug>
 #include <QDate>
 #include <iostream>
+#include <QtAlgorithms>
 #include "LendingSystem.h"
 #include "Book.h"
 #include "Person.h"
@@ -18,6 +19,10 @@ LendingSystem::LendingSystem(){
 LendingSystem::~LendingSystem(){
     write_person();      //from QList to file
     write_medium();
+    qDeleteAll(perlist);
+    perlist.clear();
+    qDeleteAll(medlist);
+    medlist.clear();
 }
 
 void LendingSystem::read_medium(){
