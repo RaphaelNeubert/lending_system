@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Dialog2</class>
- <widget class="QDialog" name="Dialog2">
+ <class>MediumDialog</class>
+ <widget class="QDialog" name="MediumDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -166,7 +166,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>accepted()</signal>
-   <receiver>Dialog2</receiver>
+   <receiver>MediumDialog</receiver>
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -182,7 +182,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>rejected()</signal>
-   <receiver>Dialog2</receiver>
+   <receiver>MediumDialog</receiver>
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">

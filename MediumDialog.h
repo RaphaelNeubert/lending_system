@@ -2,15 +2,20 @@
 #define MEDIUM_DIALOG
 
 #include <QDialog>
-#include "ui_medium_dialog.h"
+#include "ui_MediumDialog.h"
 
-class medium_dialog : public QDialog, public Ui::Dialog2{
+namespace Ui{
+    class MediumDialog;
+}
+
+class MediumDialog : public QDialog{
     Q_OBJECT
     private:
+        Ui::MediumDialog* ui;
         void switch_type(int index);
     public:
-        medium_dialog(QWidget* parent=nullptr);
-        ~medium_dialog();
+        MediumDialog(QWidget* parent=nullptr);
+        ~MediumDialog();
         QString get_title();
         QString get_type();
         QString get_type_field1();

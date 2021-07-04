@@ -1,6 +1,6 @@
 #ifndef MAINWINDOW_H 
 #define MAINWINDOW_H 
-#include "ui_lending_system.h"
+#include "ui_MainWindow.h"
 #include "lending_system.h"
 
 struct checkbox_t{
@@ -8,9 +8,14 @@ struct checkbox_t{
     QTableWidgetItem* checkbox;
 };
 
-class mainwindow: public QMainWindow, public Ui::MainWindow{
+namespace Ui{
+    class MainWindow;
+}
+
+class MainWindow: public QMainWindow{
     Q_OBJECT
     private:
+        Ui::MainWindow* ui;
         //background stuff
         lending_system lend;
         //used to access checkbox states later on
@@ -20,8 +25,8 @@ class mainwindow: public QMainWindow, public Ui::MainWindow{
         void delete_person(unsigned int id);
         void delete_medium(unsigned int id);
 	public:
-		mainwindow(QMainWindow *parent=0);
-		~mainwindow();
+		MainWindow(QMainWindow *parent=0);
+		~MainWindow();
     public slots:
         void create_medium_table();
         void create_lend_table();
